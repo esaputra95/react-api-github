@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { BsFillArrowDownCircleFill, BsStarFill, BsFillArrowUpCircleFill } from "react-icons/bs";
 import { UserInterface } from '../interface';
 

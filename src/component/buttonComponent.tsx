@@ -1,5 +1,4 @@
 import { FC, MouseEvent } from 'react';
-import { BsSearch } from "react-icons/bs";
 
 interface ButtonProps {
   children: string;
