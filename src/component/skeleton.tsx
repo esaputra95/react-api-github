@@ -1,8 +1,8 @@
 import { FC } from 'react'
 interface SkeletonInterface {
-    count:number
+    count?:number
 }
-const Skeleton: FC<SkeletonInterface> = ({count}) => {
+const Skeleton: FC<SkeletonInterface> = ({count=1}) => {
     const component = []
     for (let index = 0; index < count; index++) {
         component.push(<SkeletonComponent key={index} />)

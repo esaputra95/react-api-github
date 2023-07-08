@@ -16,11 +16,17 @@ export const fetchDataUser = async (url:string, queryParam:any) => {
     }
 };
 
-export const fetchDataRepositori = async (url:string, queryParam:any) => {
+export const fetchDataRepositori = async (url:string) => {
     try {
-        const model = await service.get(`${url}`, { params: { ...queryParam }});
-        return model.data
+        const model = await service.get(`${url}`);
+        return {
+            data : model.data,
+            error : null,
+        }
     } catch (error) {
-        return error as AxiosError;
+        return {
+            error: error as AxiosError,
+            data: []
+        }
     }
 };

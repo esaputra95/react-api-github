@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { BsFillArrowDownCircleFill, BsStarFill, BsFillArrowUpCircleFill } from "react-icons/bs";
 import { UserInterface } from '../interface';
+import Skeleton from './skeleton';
 
 type openRepoProps = {
     index: number;
@@ -22,6 +23,11 @@ const ListComponent: FC<ListProps>  = ({data, index, onOpenRepositories}) => (
             }
             
         </span>
+        <div className='pl-4'>
+            {
+                data.loading_repossitori ? <Skeleton /> : null
+            }
+        </div>
         {
             data.status && data.repossitori ? data.repossitori.map((value)=>(
                 <div className='w-full flex justify-between rounded-md pl-4'>

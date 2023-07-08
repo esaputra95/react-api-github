@@ -34,6 +34,7 @@ const App: FC = () => {
         let data = []
         if(query) {
             const {data:dataResponse, error} = await fetchDataUser('search/users', {q: query});
+
             data=dataResponse
             if(error){
                 toast.error(`${error.message}`, {
@@ -64,15 +65,24 @@ const App: FC = () => {
     const onOpenRepositories = async (args:getRepoType) => {
         const {index, user} = args;
         const newDataUSer = [...dataUser.data];
+        newDataUSer[index].loading_repossitori = true
+        setDataUser({...dataUser, data: newDataUSer})
         if(newDataUSer[index].status){
             newDataUSer[index].status = false
         }else{
             if(!newDataUSer[index].repossitori) {
-                const data = await fetchDataRepositori(`users/${user}/repos`, '')
+                const {error, data} = await fetchDataRepositori(`users/${user}/repos`);
+                if(error){
+                    toast.error(`${error.message}`, {
+                        position: "top-center",
+                        autoClose: 5000,
+                    });
+                }
                 newDataUSer[index].repossitori = data
             }
             newDataUSer[index].status = true
         }
+        newDataUSer[index].loading_repossitori = false
         setDataUser({...dataUser, data: newDataUSer})
     }
     
