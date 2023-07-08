@@ -19,7 +19,8 @@ export interface UserInterface {
     type: string;
     url: string;
     status?:boolean;
-    repossitori?: RepossitoriInterface[]
+    repossitori?: RepossitoriInterface[],
+    loading_repossitori? : boolean
 } 
 
 export interface RepossitoriInterface {
