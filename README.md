@@ -1,4 +1,4 @@
-## INSTALLATION DOCUMENTATION
+## 1. INSTALLATION DOCUMENTATION
 Follow the steps below to install the application on your device.
 If you have any questions or need assistance, please contact the developer via email at `ekosaputra.t.i@gmail.com`.
 
