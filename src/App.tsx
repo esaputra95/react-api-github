@@ -23,7 +23,7 @@ type getRepoType = {
 const App: FC = () => {
     const [dataUser, setDataUser] = useState<fetchInterface>({loading:false, data:[]})
     const [query, setQuery] = useState<string>('')
-    const [onSearch, setOnnSearch] = useState<string>('')
+    const [onSearch, setOnSearch] = useState<string>('')
 
     useEffect(()=> {
         getData(query)
@@ -32,10 +32,11 @@ const App: FC = () => {
     const getData = async (query: getDataType): Promise<void> => {
         setDataUser({...dataUser, loading:true})
         let data = []
+        let message = query?`no data found from username ${query} `:'';
         if(query) {
-            const {data:dataResponse, error} = await fetchDataUser('search/users', {q: query});
-
+            const {data:dataResponse, error} = await fetchDataUser('search/users', {q: query, per_page:5});
             data=dataResponse
+            if(data.length>0) message = `Showing User for username ${query}`
             if(error){
                 toast.error(`${error.message}`, {
                     position: "top-center",
@@ -44,6 +45,7 @@ const App: FC = () => {
             }
         }
         setDataUser({...dataUser, loading:false, data})
+        setOnSearch(message)
     }
 
     const handleOnChange = (event:ChangeEvent<HTMLInputElement>) => {
@@ -52,13 +54,11 @@ const App: FC = () => {
 
     const handleSearch = () => {
         getData(query)
-        setOnnSearch(query)
     }
 
     const handleOnEnter = (event:KeyboardEvent<HTMLInputElement>) => {
         if(event.key === "Enter"){
             getData(query)
-            setOnnSearch(query)
         }
     }
 
@@ -108,9 +108,12 @@ const App: FC = () => {
                     <ButtonComponent handleOnClick={handleSearch} isFetching={dataUser.loading}>Search</ButtonComponent>
                 </div>
                 <div className='m-2'>
-                    {
-                        onSearch!==""?<label>Showing User for username "{onSearch}"</label>:null
+                    <label>
+                        {
+                        onSearch!==""?onSearch:''
                     }
+                    </label>
+                    
                 </div>
                 {
                     dataUser.loading? 

@@ -25,7 +25,7 @@ const ListComponent: FC<ListProps>  = ({data, index, onOpenRepositories}) => (
         </span>
         <div className='pl-4'>
             {
-                data.loading_repossitori ? <Skeleton /> : null
+                data.loading_repossitori ? <Skeleton count={2} /> : null
             }
         </div>
         {
